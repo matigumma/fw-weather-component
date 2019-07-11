@@ -9,8 +9,14 @@ const { Store } = require("./LocalStorage");
 const localstorage = new Store;
 const { latitude, longitude } = localstorage.getData()
 
-typeof urilatlong.lat === 'undefined' ? lat = latitude : lat = urilatlong.lat;
-typeof urilatlong.long === 'undefined' ? long = longitude : long = urilatlong.long;
+if (typeof urilatlong.lat === 'undefined' || typeof urilatlong.long === 'undefined'){
+    lat = latitude;
+    long = longitude;
+}else{
+    lat = urilatlong.lat;
+    long = urilatlong.long;
+    ui.statusLocalstorage("URL data loaded!");
+}
 
 const { Weather } = require("./Weather");
 const weather = new Weather(lat, long); 
@@ -23,4 +29,14 @@ async function fetchWeather() {
     console.log(data);
     ui.display(data);
 }
-document.addEventListener('DOMContentLoaded', fetchWeather);
+document.addEventListener('DOMContentLoaded', fetchWeather); //start the request
+document.getElementById('setLs').addEventListener('click', (e) => {//handling localstorage set
+    localstorage.setData(lat, long);
+    ui.statusLocalstorage("data stored");
+    e.preventDefault();
+});
+document.getElementById('removeLs').addEventListener('click', (e) => {//handling localstorage set
+    localstorage.removeData();
+    ui.statusLocalstorage("data removed");
+    e.preventDefault();
+});

@@ -1,3 +1,5 @@
+const { UI } = require("./UI");
+const ui = new UI();
 export class Store {
     constructor(lat, long){
         this.lat = lat;
@@ -10,10 +12,20 @@ export class Store {
         localStorage.setItem('lat', lat);
         localStorage.setItem('long', long);
     }
+    removeData() {
+        localStorage.clear();
+    }
 
     getData() {//if data is in localstorage get it, if not use default
-        localStorage.getItem('lat') === null ? this.lat = this.defaultLat : this.lat = localStorage.getItem('lat');
-        localStorage.getItem('long') === null ? this.long = this.defaultLong : this.long = localStorage.getItem('long');
+        if (localStorage.getItem('lat') === null || localStorage.getItem('long') === null){
+            this.lat = this.defaultLat;
+            this.long = this.defaultLong; 
+            ui.statusLocalstorage("Default data loaded");
+        }else{
+            this.lat = localStorage.getItem('lat');
+            this.long = localStorage.getItem('long'); //asume this long is allways present 
+            ui.statusLocalstorage("Localstorage data loaded!");
+        }
 
         return {
             latitude: this.lat,
