@@ -4,7 +4,8 @@
   "description": "weather js component using owm api",
   "main": "index.js",
   "scripts": {
-    "build": "webpack -p"
+    "build": "webpack -p",
+    "dev": "webpack-dev-server -d"
   },
   "repository": {
     "type": "git",
