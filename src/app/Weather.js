@@ -11,4 +11,10 @@ export class Weather {
         const data = await res.json();
         return data;
     }
+
+    async updateLocation(newLat, newLong) {
+        this.lat = newLat;
+        this.long = newLong;
+    }
+
 }

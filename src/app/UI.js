@@ -6,7 +6,7 @@ export class UI {
     }
 
     display(weather) {
-        this.location.textContent = weather.name +' ';
+        console.log("City name for this coords '" + weather.name + "'");
         this.temperature.textContent = weather.main.temp + '°C ';
         this.wind.textContent = weather.wind.speed + 'm/s';
     }
