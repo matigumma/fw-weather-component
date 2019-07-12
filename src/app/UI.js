@@ -6,6 +6,7 @@ export class UI {
         this.statusLs = document.getElementById('statusLs');
         this.icon = document.getElementById('icon');
         this.desc = document.getElementById('desc');
+        this.iconmark = document.getElementById('icon-mark');
     }
 
     display(weather) {
@@ -13,8 +14,9 @@ export class UI {
         this.icon.alt = weather.weather[0].main;
         this.desc.textContent = weather.weather[0].main;
         this.location.textContent = weather.name +' ';
-        this.temperature.textContent = weather.main.temp + '°C ';
-        this.wind.textContent = weather.wind.speed + 'm/s';
+        this.temperature.textContent = 'Temp: ' + weather.main.temp + '°C ';
+        this.wind.textContent = 'wind: ' + weather.wind.speed + 'm/s';
+        this.iconmark.style = `transform: rotate(${weather.wind.deg}deg); -ms - transform: rotate(${weather.wind.deg}deg); -webkit - transform: rotate(${weather.wind.deg}deg);`;
     }
 
     statusLocalstorage(status) {

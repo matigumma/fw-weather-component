@@ -26,17 +26,18 @@ require("./index.css");
 
 async function fetchWeather() {
     const data = await weather.getWeather();
-    console.log(data);
+   console.log(data);
     ui.display(data);
 }
 document.addEventListener('DOMContentLoaded', fetchWeather); //start the request
+
 document.getElementById('setLs').addEventListener('click', (e) => {//handling localstorage set
     localstorage.setData(lat, long);
     ui.statusLocalstorage("data stored");
-    e.preventDefault();
+    fetchWeather();
 });
 document.getElementById('removeLs').addEventListener('click', (e) => {//handling localstorage set
     localstorage.removeData();
     ui.statusLocalstorage("data removed");
-    e.preventDefault();
+    fetchWeather();
 });
